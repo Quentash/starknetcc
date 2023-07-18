@@ -6,6 +6,20 @@ enum PieceColor {
     Black: (),
 }
 
+impl PieceColorSerdeLen of dojo::SerdeLen<PieceColor> {
+    #[inline(always)]
+    fn len() -> usize {
+        1
+    }
+}
+
+impl OptionPieceColorSerdeLen of dojo::SerdeLen<Option<PieceColor>> {
+    #[inline(always)]
+    fn len() -> usize {
+        1
+    }
+}
+
 #[derive(Component, Copy, Drop, Serde, SerdeLen)]
 struct Piece {
     color: PieceColor,
@@ -30,7 +44,6 @@ struct Game {
     status: bool,
     winner: Option<PieceColor>,
 }
-
 
 #[derive(Component, Copy, Drop, Serde, SerdeLen)]
 struct GameTurn {
